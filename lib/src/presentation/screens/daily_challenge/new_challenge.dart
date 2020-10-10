@@ -3,6 +3,7 @@ import 'package:daily_mcq/src/presentation/screens/history.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:intl/intl.dart';
 
 import '../../../data/models/question.dart';
@@ -192,16 +193,9 @@ class _NewDailyChallengeBuilderState extends State<NewDailyChallengeBuilder> {
                         SizedBox(
                           height: 10,
                         ),
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            "${question.question.questionBody}",
-                            style: greyText.copyWith(
-                              color: question.question.questionBody == NO_CONTENT
-                                  ? Colors.redAccent
-                                  : Colors.grey,
-                            ),
-                          ),
+                        MarkdownBody(
+                          selectable: true,
+                          data: question.question.questionBody,
                         ),
                         SizedBox(
                           height: 20,
