@@ -22,14 +22,14 @@ class DscTitleWidget extends StatelessWidget {
             text: TextSpan(
               style: TextStyle(
                 color: Colors.grey[700],
-                fontSize: 12,
+                fontSize: 14,
               ),
               children: [
                 TextSpan(text: 'Developer Student Clubs'),
                 TextSpan(
                   text: '\nVellore Institute of Technology',
                   style: TextStyle(
-                    fontSize: 7,
+                    fontSize: 8,
                     // fontWeight: FontWeight.w600,
                   ),
                 ),
