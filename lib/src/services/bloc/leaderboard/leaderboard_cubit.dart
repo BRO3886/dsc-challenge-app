@@ -11,6 +11,8 @@ part 'leaderboard_state.dart';
 class LeaderboardCubit extends Cubit<LeaderboardState> {
   LeaderboardCubit() : super(LeaderboardLoading());
 
+  List<Result> results = [];
+
   getLeaderboard() async {
     emit(LeaderboardLoading());
     final response = await LeaderboardRepository.getLeaderBoard();
@@ -18,6 +20,8 @@ class LeaderboardCubit extends Cubit<LeaderboardState> {
       case Status.LOADING:
         break;
       case Status.COMPLETED:
+        results.clear();
+        results.addAll(response.data.result);
         emit(LeaderboardSuccess(leaderboard: response.data));
         break;
       case Status.ERROR:

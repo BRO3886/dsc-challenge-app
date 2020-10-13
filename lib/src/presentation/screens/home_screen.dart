@@ -21,10 +21,11 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildAppBar(context),
-      body: BlocProvider(
-        create: (context) => LeaderboardCubit(),
-        child: HomescreenBuilder(),
-      ),
+      // body: BlocProvider<LeaderboardCubit>(
+      //   create: (_) => LeaderboardCubit(),
+      //   child: HomescreenBuilder(),
+      // ),
+      body: HomescreenBuilder(),
     );
   }
 
@@ -123,7 +124,8 @@ class _HomescreenBuilderState extends State<HomescreenBuilder> {
                       if (_leaderboardCubit.state is LeaderboardSuccess) {
                         Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) =>
-                              LeaderboardScreen(result: result),
+                              LeaderboardScreen(),
+                          settings: RouteSettings(arguments: result),
                         ));
                       }
                     },
