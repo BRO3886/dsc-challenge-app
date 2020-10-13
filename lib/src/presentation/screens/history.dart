@@ -1,6 +1,7 @@
 import 'package:daily_mcq/src/data/models/history.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 
 import '../../data/repos/question.dart';
 import '../../services/bloc/history/history_cubit.dart';
@@ -79,33 +80,39 @@ class _HistoryBuilderState extends State<HistoryBuilder> {
                     trailing: CircleAvatar(
                       radius: 12,
                       foregroundColor: Colors.white,
-                      backgroundColor: (history[index].correctAnswer ==
-                              history[index].yourAnswer)
+                      backgroundColor: (history[index].correctAnswer == history[index].yourAnswer)
                           ? primaryColor
                           : Colors.redAccent,
                       child: Icon(
-                        (history[index].correctAnswer ==
-                                history[index].yourAnswer)
+                        (history[index].correctAnswer == history[index].yourAnswer)
                             ? Icons.done
                             : Icons.close,
                         size: 16,
                       ),
                     ),
                     title: Text(
-                      history[index].question,
+                      history[index].yourAnswer,
                       softWrap: false,
                       overflow: TextOverflow.ellipsis,
                     ),
                     leading: Text(history[index].marks.toString() ?? ""),
                     children: [
+                      Container(
+                        padding: EdgeInsets.all(8),
+                        margin: EdgeInsets.all(8),
+                        child: MarkdownBody(
+                          data: history[index].question,
+                        ),
+                      ),
                       ListTile(
                         title: Text('Your answer'),
                         subtitle: Text(history[index].yourAnswer ?? ""),
                       ),
-                      ListTile(
-                        title: Text('Correct Answer'),
-                        subtitle: Text(history[index].correctAnswer ?? ""),
-                      ),
+                      if (history[index].questionType == 0)
+                        ListTile(
+                          title: Text('Correct Answer'),
+                          subtitle: Text(history[index].correctAnswer ?? ""),
+                        ),
                       ListTile(
                         title: Text('Marks awarded'),
                         subtitle: Text(history[index].marks.toString() ?? ""),
