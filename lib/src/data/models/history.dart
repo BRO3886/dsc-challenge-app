@@ -4,8 +4,7 @@
 
 import 'dart:convert';
 
-QuestionHistory questionHistoryFromMap(String str) =>
-    QuestionHistory.fromMap(json.decode(str));
+QuestionHistory questionHistoryFromMap(String str) => QuestionHistory.fromMap(json.decode(str));
 
 String questionHistoryToMap(QuestionHistory data) => json.encode(data.toMap());
 
@@ -20,8 +19,7 @@ class QuestionHistory {
 
   factory QuestionHistory.fromMap(Map<String, dynamic> json) => QuestionHistory(
         message: json["message"],
-        history:
-            List<History>.from(json["history"].map((x) => History.fromMap(x))),
+        history: List<History>.from(json["history"].map((x) => History.fromMap(x))),
       );
 
   Map<String, dynamic> toMap() => {
@@ -38,6 +36,7 @@ class History {
     this.correctAnswer,
     this.marks,
     this.questionType,
+    this.isEvaluated,
   });
 
   String question;
@@ -46,6 +45,7 @@ class History {
   String correctAnswer;
   double marks;
   int questionType;
+  bool isEvaluated;
 
   factory History.fromMap(Map<String, dynamic> json) => History(
         question: json["question"],
@@ -54,6 +54,7 @@ class History {
         correctAnswer: json["correct_answer"],
         marks: json["marks"],
         questionType: json["question_type"],
+        isEvaluated: json["is_evaluated"],
       );
 
   Map<String, dynamic> toMap() => {
@@ -63,5 +64,6 @@ class History {
         "correct_answer": correctAnswer,
         "marks": marks,
         "question_type": questionType,
+        "is_evaluated": isEvaluated,
       };
 }

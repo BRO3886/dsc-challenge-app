@@ -34,6 +34,7 @@ class MyApp extends StatelessWidget {
     return BlocProvider<LeaderboardCubit>(
       create: (context) => LeaderboardCubit(),
       child: MaterialApp(
+        themeMode: ThemeMode.light,
         theme: appThemeData,
         title: 'Challenges App',
         home: SplashScreen(),

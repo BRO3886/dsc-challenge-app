@@ -77,19 +77,25 @@ class _HistoryBuilderState extends State<HistoryBuilder> {
                   itemCount: history.length,
                   itemBuilder: (context, index) => ExpansionTile(
                     backgroundColor: Colors.white,
-                    trailing: CircleAvatar(
-                      radius: 12,
-                      foregroundColor: Colors.white,
-                      backgroundColor: (history[index].correctAnswer == history[index].yourAnswer)
-                          ? primaryColor
-                          : Colors.redAccent,
-                      child: Icon(
-                        (history[index].correctAnswer == history[index].yourAnswer)
-                            ? Icons.done
-                            : Icons.close,
-                        size: 16,
-                      ),
-                    ),
+                    trailing: history[index].isEvaluated
+                        ? CircleAvatar(
+                            radius: 12,
+                            foregroundColor: Colors.white,
+                            backgroundColor:
+                                (history[index].correctAnswer == history[index].yourAnswer)
+                                    ? primaryColor
+                                    : Color(0xFFFDDF7C),
+                            child: Icon(
+                              (history[index].correctAnswer == history[index].yourAnswer)
+                                  ? Icons.done
+                                  : Icons.close,
+                              size: 16,
+                              color: history[index].correctAnswer == history[index].yourAnswer
+                                  ? Colors.white
+                                  : Colors.black,
+                            ),
+                          )
+                        : Icon(Icons.access_time),
                     title: Text(
                       history[index].yourAnswer,
                       softWrap: false,
@@ -113,10 +119,15 @@ class _HistoryBuilderState extends State<HistoryBuilder> {
                           title: Text('Correct Answer'),
                           subtitle: Text(history[index].correctAnswer ?? ""),
                         ),
-                      ListTile(
-                        title: Text('Marks awarded'),
-                        subtitle: Text(history[index].marks.toString() ?? ""),
-                      ),
+                      history[index].isEvaluated
+                          ? ListTile(
+                              title: Text('Marks awarded'),
+                              subtitle: Text(history[index].marks.toString() ?? ""),
+                            )
+                          : ListTile(
+                              title: Text('Under Evaluation'),
+                              subtitle: Text('Marks will be awarded shortly'),
+                            ),
                     ],
                   ),
                 )

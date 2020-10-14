@@ -29,7 +29,7 @@ TextStyle greyText = TextStyle(
 
 final ThemeData appThemeData = ThemeData(
   fontFamily: 'Montserrat',
-  primaryColor: primaryColor,
+  primaryColor: accentColor,
   accentColor: accentColor,
   canvasColor: canvasColor,
   dialogTheme: DialogTheme(
